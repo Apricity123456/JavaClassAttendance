@@ -30,3 +30,5 @@ bin/
 
 # Ignore Maven target directory
 target/
+.idea/
+
