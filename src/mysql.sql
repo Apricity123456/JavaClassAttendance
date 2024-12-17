@@ -1,31 +1,55 @@
-CREATE DATABASE ClassAttendance;
+CREATE DATABASE class_management;
 
-USE ClassAttendance;
+USE class_management;
 
 -- 用户表
-CREATE TABLE users (
-    userID VARCHAR(50) PRIMARY KEY,
-    name VARCHAR(100),
-    email VARCHAR(100),
-    password VARCHAR(50),
-    role ENUM('admin', 'teacher', 'student') NOT NULL
+CREATE TABLE Users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(50) NOT NULL,
+    role ENUM('admin', 'student') NOT NULL
 );
 
 -- 课程表
-CREATE TABLE courses (
-    courseID VARCHAR(50) PRIMARY KEY,
-    courseName VARCHAR(100),
-    teacherID VARCHAR(50),
-    FOREIGN KEY (teacherID) REFERENCES users(userID)
+CREATE TABLE Courses (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    course_name VARCHAR(100) NOT NULL,
+    course_time VARCHAR(50),
+    course_location VARCHAR(100)
 );
 
--- 考勤记录表
-CREATE TABLE attendance (
-    recordID INT AUTO_INCREMENT PRIMARY KEY,
-    courseID VARCHAR(50),
-    studentID VARCHAR(50),
-    status VARCHAR(10),
-    date DATE,
-    FOREIGN KEY (courseID) REFERENCES courses(courseID),
-    FOREIGN KEY (studentID) REFERENCES users(userID)
+-- 报名表
+CREATE TABLE Enrollments (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    student_id INT NOT NULL,
+    course_id INT NOT NULL,
+    FOREIGN KEY (student_id) REFERENCES Users(id),
+    FOREIGN KEY (course_id) REFERENCES Courses(id)
+);
+
+-- 公告表
+CREATE TABLE Announcements (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(100),
+    content TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 作业表
+CREATE TABLE Assignments (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(100),
+    description TEXT,
+    deadline DATE
+);
+
+-- 作业提交表
+CREATE TABLE Submissions (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    assignment_id INT NOT NULL,
+    student_id INT NOT NULL,
+    submission_content TEXT,
+    submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (assignment_id) REFERENCES Assignments(id),
+    FOREIGN KEY (student_id) REFERENCES Users(id)
 );

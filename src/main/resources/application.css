@@ -1,0 +1,63 @@
+/* 页面背景 */
+.root {
+    -fx-background-color: #f9f9f9;
+}
+
+/* 标题样式 */
+.label-title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+/* 按钮样式 */
+.button {
+    -fx-background-radius: 5;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 5 15;
+}
+
+.button:hover {
+    -fx-background-color: #e0e0e0;
+}
+
+.button-add {
+    -fx-background-color: #4CAF50; /* 绿色 */
+    -fx-text-fill: white;
+}
+
+.button-edit {
+    -fx-background-color: #2196F3; /* 蓝色 */
+    -fx-text-fill: white;
+}
+
+.button-delete {
+    -fx-background-color: #F44336; /* 红色 */
+    -fx-text-fill: white;
+}
+
+.text-field {
+    -fx-background-radius: 5;
+    -fx-padding: 5;
+    -fx-font-size: 14px;
+}
+
+/* 表格样式 */
+.table-view {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #dcdcdc;
+    -fx-border-radius: 5;
+    -fx-padding: 5;
+}
+
+.table-view .column-header {
+    -fx-background-color: #f1f1f1;
+    -fx-text-fill: #333333;
+    -fx-font-weight: bold;
+}
+
+.table-row-cell:hover {
+    -fx-background-color: #f5f5f5;
+}
+
