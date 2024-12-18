@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.collections.FXCollections?>
+
+<VBox spacing="10" xmlns:fx="http://javafx.com/fxml">
+    <Label text="Generate Report" style="-fx-font-size: 20px;" />
+    <HBox spacing="10">
+        <Label text="Select Report Type:" />
+        <ChoiceBox>
+            <items>
+                <FXCollections fx:factory="observableArrayList" fx:value="Attendance Report" />
+                <FXCollections fx:factory="observableArrayList" fx:value="Class Report" />
+            </items>
+        </ChoiceBox>
+    </HBox>
+    <Button text="Generate Report" />
+</VBox>

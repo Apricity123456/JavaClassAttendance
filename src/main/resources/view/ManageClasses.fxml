@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.Button?>
+
+<VBox spacing="10" xmlns:fx="http://javafx.com/fxml">
+    <Label text="Manage Classes" style="-fx-font-size: 20px;" />
+    <TableView>
+        <columns>
+            <TableColumn text="Class ID" />
+            <TableColumn text="Class Name" />
+            <TableColumn text="Instructor" />
+        </columns>
+    </TableView>
+    <HBox spacing="10">
+        <Button text="Add Class" />
+        <Button text="Edit Class" />
+        <Button text="Delete Class" />
+    </HBox>
+</VBox>

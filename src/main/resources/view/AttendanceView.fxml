@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.Button?>
+
+<VBox spacing="10" xmlns:fx="http://javafx.com/fxml">
+    <Label text="Attendance Management" style="-fx-font-size: 20px;" />
+    <TableView>
+        <columns>
+            <TableColumn text="Student ID" />
+            <TableColumn text="Name" />
+            <TableColumn text="Attendance Status" />
+        </columns>
+    </TableView>
+    <Button text="Mark Attendance" />
+</VBox>

@@ -1,44 +1,83 @@
 package controller;
-import view.MainApp;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 
-import java.io.IOException;
+import javafx.collections.FXCollections;
+import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import view.MainApp;
 
 public class LoginController {
-
-    @FXML
-    private Button loginButton;
-
-    @FXML
-    private Button registerButton;
 
     @FXML
     private TextField usernameField;
 
     @FXML
-    private TextField passwordField;
+    private PasswordField passwordField;
+
+    @FXML
+    private ComboBox<String> roleComboBox;
+
+    @FXML
+    private ImageView logoImageView;
 
     private MainApp mainApp;
 
-    // 注入 MainApp 实例
-    public void setMainApp(MainApp mainApp) {
+    @FXML
+    public void initialize() {
+        // 设置角色选项数据
+        roleComboBox.setItems(FXCollections.observableArrayList("Student", "Teacher"));
+
+        // 加载 Logo 图片
+        try {
+            logoImageView.setImage(new Image(getClass().getResourceAsStream("/images/logo.png")));
+        } catch (Exception e) {
+            System.out.println("Error loading logo: " + e.getMessage());
+        }
+    }
+
+    /**
+     * 设置 MainApp 实例
+     *
+     * @param mainApp 主应用程序实例
+     */
+    public void initializeMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }
 
     @FXML
-    private void handleLogin() throws IOException {
-        // 简单验证逻辑（实际应连接数据库）
-        if ("admin".equals(usernameField.getText()) && "1234".equals(passwordField.getText())) {
-            mainApp.showAdminPage(); // 登录成功，跳转到管理员页面
+    private void handleLogin() {
+        String username = usernameField.getText();
+        String password = passwordField.getText();
+        String role = roleComboBox.getValue();
+
+        if (username.isEmpty() || password.isEmpty() || role == null) {
+            showAlert(Alert.AlertType.ERROR, "Login Failed", "Please fill in all fields.");
         } else {
-            System.out.println("Invalid credentials!");
+            // 登录成功后跳转到相应页面
+            if ("Student".equals(role)) {
+                mainApp.showStudentPage();
+            } else if ("Teacher".equals(role)) {
+                mainApp.showTeacherPage();
+            } else {
+                showAlert(Alert.AlertType.ERROR, "Invalid Role", "Please select a valid role.");
+            }
         }
     }
 
     @FXML
-    private void handleRegister() throws IOException {
-        mainApp.showRegisterPage(); // 跳转到注册页面
+    private void handleExit() {
+        System.exit(0);
+    }
+
+    private void showAlert(Alert.AlertType type, String title, String content) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 }
