@@ -73,31 +73,7 @@ public class MainApp extends Application {
      * 显示教师主页面
      */
     public void showTeacherPage() {
-        try {
-            // 加载 FXML 文件
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/TeacherView.fxml"));
-            BorderPane root = loader.load(); // 加载 BorderPane 布局
-
-            // 调用 createHeaderBar() 并将其添加到顶部
-            HBox headerBar = createHeaderBar();
-            root.setTop(headerBar); // 将标题栏添加到 BorderPane 的顶部
-
-            // 创建 Scene，并将 root 作为根节点
-            Scene scene = new Scene(root, 900, 600);
-            scene.getStylesheets().add(getClass().getResource("/application.css").toExternalForm());
-
-            // 调用 addWindowDrag 并传入 Scene 实现窗口拖动
-            addWindowDrag(scene);
-
-            // 设置场景和窗口标题
-            primaryStage.setScene(scene);
-            primaryStage.setTitle("Teacher Dashboard");
-            primaryStage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            showErrorAlert("Error", "Failed to load Teacher Page.");
-        }
+            loadPage("/view/TeacherView.fxml","Teacher Dashboard");
     }
 
 
@@ -106,31 +82,7 @@ public class MainApp extends Application {
      * 显示学生主页面
      */
     public void showStudentPage() {
-        try {
-            // 加载 FXML 文件
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/StudentView.fxml"));
-            BorderPane root = loader.load(); // 加载 BorderPane 布局
-
-            // 调用 createHeaderBar() 并将其添加到顶部
-            HBox headerBar = createHeaderBar();
-            root.setTop(headerBar); // 将标题栏添加到 BorderPane 的顶部
-
-            // 创建 Scene，并将 root 作为根节点
-            Scene scene = new Scene(root, 900, 600);
-            scene.getStylesheets().add(getClass().getResource("/application.css").toExternalForm());
-
-            // 调用 addWindowDrag 并传入 Scene 实现窗口拖动
-            addWindowDrag(scene);
-
-            // 设置场景和窗口标题
-            primaryStage.setScene(scene);
-            primaryStage.setTitle("Student Dashboard");
-            primaryStage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            showErrorAlert("Error", "Failed to load Student Page.");
-        }
+            loadPage("/view/StudentView.fxml","Student Dashboard");
     }
 
 
@@ -141,11 +93,22 @@ public class MainApp extends Application {
      */
     private void loadPage(String fxmlFilePath, String title) {
         try {
+            // 加载 FXML 文件
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFilePath));
-            Scene scene = new Scene(loader.load(), 900, 600);
+            BorderPane root = loader.load(); // 加载 BorderPane 布局
 
-            addWindowDrag(scene); // 添加窗口拖动功能
+            // 调用 createHeaderBar() 并将其添加到顶部
+            HBox headerBar = createHeaderBar();
+            root.setTop(headerBar); // 将标题栏添加到 BorderPane 的顶部
 
+            // 创建 Scene，并将 root 作为根节点
+            Scene scene = new Scene(root, 900, 600);
+            scene.getStylesheets().add(getClass().getResource("/application.css").toExternalForm());
+
+            // 调用 addWindowDrag 并传入 Scene 实现窗口拖动
+            addWindowDrag(scene);
+
+            // 设置场景和窗口标题
             primaryStage.setScene(scene);
             primaryStage.setTitle(title);
             primaryStage.show();
