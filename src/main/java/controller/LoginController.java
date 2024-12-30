@@ -10,6 +10,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import view.MainApp;
 
+//import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import java.io.IOException;
+
 public class LoginController {
 
     @FXML
@@ -68,6 +75,12 @@ public class LoginController {
         }
     }
 
+
+    // 这个方法将在点击注册链接时被调用
+    @FXML
+    private void showRegistrationPage() {
+        mainApp.showRegistrationPage();
+    }
     @FXML
     private void handleExit() {
         System.exit(0);
@@ -81,3 +94,5 @@ public class LoginController {
         alert.showAndWait();
     }
 }
+
+
