@@ -10,12 +10,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import view.MainApp;
 
-//import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import java.io.IOException;
+import database.DatabaseConnection;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import model.PasswordUtil;
 
 public class LoginController {
 
@@ -62,25 +62,46 @@ public class LoginController {
         String role = roleComboBox.getValue();
 
         if (username.isEmpty() || password.isEmpty() || role == null) {
-            showAlert(Alert.AlertType.ERROR, "Login Failed", "Please fill in all fields.");
-        } else {
-            // 登录成功后跳转到相应页面
-            if ("Student".equals(role)) {
-                mainApp.showStudentPage();
-            } else if ("Teacher".equals(role)) {
-                mainApp.showTeacherPage();
+            showAlert(Alert.AlertType.ERROR, "Validation Error", "All fields are required!");
+            return;
+        }
+        String hashedPassword = PasswordUtil.hashPassword(password);
+
+        String query = "SELECT * FROM users WHERE username = ? AND password = ? AND role = ?";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+                PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setString(1, username);
+            statement.setString(2, hashedPassword);
+            statement.setString(3, role);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                showAlert(Alert.AlertType.INFORMATION, "Success", "Login successful!");
+                if ("Student".equals(role)) {
+                    // 跳转到学生页面
+                    mainApp.showStudentPage();
+                } else if ("Teacher".equals(role)) {
+                    // 跳转到教师页面
+                    mainApp.showTeacherPage();
+                }
             } else {
-                showAlert(Alert.AlertType.ERROR, "Invalid Role", "Please select a valid role.");
+                showAlert(Alert.AlertType.ERROR, "Login Failed", "Invalid credentials!");
             }
+
+        } catch (SQLException e) {
+            showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to login: " + e.getMessage());
         }
     }
-
 
     // 这个方法将在点击注册链接时被调用
     @FXML
     private void showRegistrationPage() {
         mainApp.showRegistrationPage();
     }
+
     @FXML
     private void handleExit() {
         System.exit(0);
@@ -94,5 +115,3 @@ public class LoginController {
         alert.showAndWait();
     }
 }
-
-

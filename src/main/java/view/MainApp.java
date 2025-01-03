@@ -1,5 +1,6 @@
 package view;
 
+import java.util.Locale;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -10,13 +11,14 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import controller.LoginController;
 import controller.RegisterController;
+import controller.TeacherController;
+import controller.StudentController;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;        // 按钮控件
-import javafx.scene.control.Label;         // 标签控件
-import javafx.scene.image.ImageView;       // 图像视图，用于显示图标
-import javafx.geometry.Insets;             // 内边距设置
+import javafx.scene.control.Button; // 按钮控件
+import javafx.scene.control.Label; // 标签控件
+import javafx.scene.image.ImageView; // 图像视图，用于显示图标
+import javafx.geometry.Insets; // 内边距设置
 import javafx.scene.input.MouseEvent;
-
 
 import java.io.IOException;
 
@@ -28,6 +30,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
+        Locale.setDefault(new Locale("en", "US"));
         this.primaryStage = primaryStage;
         primaryStage.setTitle("Course Management");
         primaryStage.initStyle(StageStyle.UNDECORATED);
@@ -42,10 +45,11 @@ public class MainApp extends Application {
     public void showLoginPage() {
         try {
             // 加载 FXML 文件
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/LoginView.fxml"));
-//            VBox root = loader.load(); // 修改为 VBox，确保与 FXML 文件匹配
+            // FXMLLoader loader = new
+            // FXMLLoader(getClass().getResource("/view/LoginView.fxml"));
+            // VBox root = loader.load(); // 修改为 VBox，确保与 FXML 文件匹配
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/LoginView.fxml"));
-            BorderPane root = loader.load();  // 假设 LoginView.fxml 使用的是 BorderPane
+            BorderPane root = loader.load(); // 假设 LoginView.fxml 使用的是 BorderPane
 
             // 调用 createHeaderBar() 并将其添加到顶部
             HBox headerBar = createHeaderBar("Login");
@@ -58,9 +62,8 @@ public class MainApp extends Application {
             addWindowDrag(scene);
 
             // 获取控制器并传递 MainApp 实例
-            LoginController  Logincontroller = loader.getController();
+            LoginController Logincontroller = loader.getController();
             Logincontroller.initializeMainApp(this); // 确保调用的方法名为 initializeMainApp
-
 
             // 设置窗口图标和标题
             primaryStage.setScene(scene);
@@ -74,12 +77,37 @@ public class MainApp extends Application {
         }
     }
 
-
     /**
      * 显示教师主页面
      */
     public void showTeacherPage() {
-            loadPage("/view/TeacherView.fxml","Teacher Dashboard");
+        // loadPage("/view/TeacherView.fxml","Teacher Dashboard");
+        try {
+            // 加载 FXML 文件
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/TeacherView.fxml"));
+            BorderPane root = loader.load(); // 加载 BorderPane 布局
+
+            // 调用 createHeaderBar() 并将其添加到顶部
+            HBox headerBar = createHeaderBar("Teacher Dashboard");
+            root.setTop(headerBar); // 将标题栏添加到 BorderPane 的顶部
+
+            // 创建 Scene，并将 root 作为根节点
+            Scene scene = new Scene(root, 900, 600);
+            scene.getStylesheets().add(getClass().getResource("/application.css").toExternalForm());
+
+            // 调用 addWindowDrag 并传入 Scene 实现窗口拖动
+            addWindowDrag(scene);
+
+            TeacherController TeacherViewController = loader.getController();
+            TeacherViewController.initializeMainApp(this);
+            // 设置场景和窗口标题
+            primaryStage.setScene(scene);
+            primaryStage.setTitle("Register");
+            primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showErrorAlert("Error", "Failed to load " + "Register");
+        }
     }
 
     public void showRegistrationPage() {
@@ -99,7 +127,7 @@ public class MainApp extends Application {
             // 调用 addWindowDrag 并传入 Scene 实现窗口拖动
             addWindowDrag(scene);
 
-            RegisterController RegisterController=loader.getController();
+            RegisterController RegisterController = loader.getController();
             RegisterController.initializeMainApp(this);
             // 设置场景和窗口标题
             primaryStage.setScene(scene);
@@ -116,11 +144,34 @@ public class MainApp extends Application {
      * 显示学生主页面
      */
     public void showStudentPage() {
-            loadPage("/view/StudentView.fxml","Student Dashboard");
+        // loadPage("/view/StudentView.fxml","Student Dashboard");
+        try {
+            // 加载 FXML 文件
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/StudentView.fxml"));
+            BorderPane root = loader.load(); // 加载 BorderPane 布局
+
+            // 调用 createHeaderBar() 并将其添加到顶部
+            HBox headerBar = createHeaderBar("Student Dashboard");
+            root.setTop(headerBar); // 将标题栏添加到 BorderPane 的顶部
+
+            // 创建 Scene，并将 root 作为根节点
+            Scene scene = new Scene(root, 900, 600);
+            scene.getStylesheets().add(getClass().getResource("/application.css").toExternalForm());
+
+            // 调用 addWindowDrag 并传入 Scene 实现窗口拖动
+            addWindowDrag(scene);
+
+            StudentController StudentViewController = loader.getController();
+            StudentViewController.initializeMainApp(this);
+            // 设置场景和窗口标题
+            primaryStage.setScene(scene);
+            primaryStage.setTitle("Register");
+            primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showErrorAlert("Error", "Failed to load " + "Register");
+        }
     }
-
-
-
 
     /**
      * 通用方法：加载页面
@@ -184,13 +235,13 @@ public class MainApp extends Application {
             Image logo = new Image(getClass().getResourceAsStream("/images/logo.png"));
             logoImageView.setImage(logo);
             logoImageView.setFitHeight(30); // 设置图标高度
-            logoImageView.setFitWidth(60);  // 设置图标宽度
+            logoImageView.setFitWidth(60); // 设置图标宽度
         } catch (Exception e) {
             System.out.println("Failed to load logo: " + e.getMessage());
         }
 
         // 标题文本
-        Label title = new Label("Welcome to Course Management - "+ name);
+        Label title = new Label("Welcome to Course Management - " + name);
         title.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
 
         Region spacer = new Region();
@@ -201,7 +252,8 @@ public class MainApp extends Application {
         closeButton.setStyle("-fx-background-color: #ff4d4d; -fx-text-fill: white; -fx-font-weight: bold;");
         closeButton.setOnAction(e -> System.exit(0)); // 退出程序
 
-        closeButton.setOnMouseEntered(e -> closeButton.setStyle("-fx-background-color: #d9534f; -fx-text-fill: white;"));
+        closeButton
+                .setOnMouseEntered(e -> closeButton.setStyle("-fx-background-color: #d9534f; -fx-text-fill: white;"));
         closeButton.setOnMouseExited(e -> closeButton.setStyle("-fx-background-color: #ff4d4d; -fx-text-fill: white;"));
 
         // 标题栏布局
@@ -211,7 +263,6 @@ public class MainApp extends Application {
 
         return headerBar;
     }
-
 
     public static void main(String[] args) {
         launch(args);

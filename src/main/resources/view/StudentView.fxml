@@ -7,6 +7,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Region?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="controller.StudentController">
     <!-- 顶部标题栏 -->
@@ -23,19 +25,39 @@
             <Button text="View Attendance" onAction="#handleViewAttendance" />
             <Button text="View Timetable" onAction="#handleViewTimetable" />
             <Button text="Generate Report" onAction="#handleGenerateReport" />
+            <!-- 分隔空白区域 -->
+            <Region VBox.vgrow="always" />
+
+            <!-- Logout 按钮 -->
+            <Button text="Logout"
+                    onAction="#handleLogout"
+                    style="-fx-background-color: #ff4d4d; -fx-text-fill: white; -fx-font-weight: bold;"/>
         </VBox>
     </left>
 
     <!-- 中央表格区域 -->
     <center>
         <VBox spacing="10" style="-fx-padding: 10;">
+            <HBox spacing="10">
+                <Label text="Search Course:" />
+                <TextField promptText="Search Course..." />
+                <Button text="Search" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" />
+            </HBox>
+
             <TableView>
                 <columns>
-                    <TableColumn text="Date" />
+                    <TableColumn text="Course ID" />
                     <TableColumn text="Course Name" />
-                    <TableColumn text="Attendance Status" />
+                    <TableColumn text="Instructor" />
                 </columns>
             </TableView>
+
+            <HBox spacing="10">
+                <Button text="Add Course" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" />
+                <Button text="Edit Course" style="-fx-background-color: #2196F3; -fx-text-fill: white;" />
+                <Button text="Delete Course" style="-fx-background-color: #f44336; -fx-text-fill: white;" />
+            </HBox>
         </VBox>
     </center>
 </BorderPane>
+

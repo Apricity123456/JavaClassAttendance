@@ -8,6 +8,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Region?>
 
 
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="controller.TeacherController">
@@ -26,6 +27,14 @@
             <Button text="Manage Classes" onAction="#handleManageClasses" />
             <Button text="Manage Students" onAction="#handleManageStudents" />
             <Button text="Generate Report" onAction="#handleGenerateReport" />
+            <!-- 分隔空白区域 -->
+            <!-- 分隔空白区域 -->
+            <Region VBox.vgrow="always" />
+
+            <!-- Logout 按钮 -->
+            <Button text="Logout"
+                    onAction="#handleLogout"
+                    style="-fx-background-color: #ff4d4d; -fx-text-fill: white; -fx-font-weight: bold;"/>
         </VBox>
     </left>
 

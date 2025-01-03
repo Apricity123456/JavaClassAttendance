@@ -1,18 +1,20 @@
 package controller;
+
+import database.DatabaseConnection;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.ComboBox;
-
+import javafx.scene.control.Alert;
 import javafx.collections.FXCollections;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
-import javafx.scene.Scene;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.fxml.FXMLLoader;
 import view.MainApp;
 //import javafx.io.IOException;
+import model.PasswordUtil;
 
 public class RegisterController {
 
@@ -27,13 +29,14 @@ public class RegisterController {
     @FXML
     private PasswordField confirmPasswordField; // 确认密码字段
     private MainApp mainApp;
-//    @FXML
-//    private ComboBox<String> roleComboBox;
+    // @FXML
+    // private ComboBox<String> roleComboBox;
 
     public void initialize() {
         // 使用代码动态设置ComboBox项
         roleComboBox.setItems(FXCollections.observableArrayList("Student", "Teacher"));
     }
+
     public void initializeMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }
@@ -60,21 +63,51 @@ public class RegisterController {
         String username = usernameField.getText();
         String password = passwordField.getText();
         String confirmPassword = confirmPasswordField.getText();
+        String role = roleComboBox.getValue();
 
-        // 验证密码是否匹配
-        if (!password.equals(confirmPassword)) {
-            System.out.println("Passwords do not match!");
+        if (name.isEmpty() || username.isEmpty() || password.isEmpty() || role == null) {
+            showAlert(Alert.AlertType.ERROR, "Validation Error", "All fields are required!");
             return;
         }
 
-        // 在这里执行注册逻辑，例如保存用户信息到数据库等
-        System.out.println("Registration successful for " + name + " with username: " + username);
+        if (!password.equals(confirmPassword)) {
+            showAlert(Alert.AlertType.ERROR, "Password Mismatch", "Passwords do not match!");
+            return;
+        }
+
+        // 哈希加密密码
+        String hashedPassword = PasswordUtil.hashPassword(password);
+        // 保存到数据库
+        String query = "INSERT INTO users (name, username, password, role) VALUES (?, ?, ?, ?)";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+                PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setString(1, name);
+            statement.setString(2, username);
+            statement.setString(3, hashedPassword);
+            statement.setString(4, role);
+
+            statement.executeUpdate();
+            showAlert(Alert.AlertType.INFORMATION, "Success", "Registration successful!");
+
+        } catch (SQLException e) {
+            showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to register user: " + e.getMessage());
+        }
+    }
+
+    private void showAlert(Alert.AlertType type, String title, String content) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 
     // 处理返回按钮点击事件
     @FXML
     private void handleBack() {
         mainApp.showLoginPage();
-        System.out.println("Back to login page.");
+        // System.out.println("Back to login page.");
     }
 }
