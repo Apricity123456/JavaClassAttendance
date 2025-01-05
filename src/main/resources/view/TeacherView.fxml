@@ -1,65 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Region?>
-
+<?import javafx.scene.layout.HBox?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="controller.TeacherController">
+
     <!-- 顶部标题栏 -->
     <top>
-        <HBox spacing="10" style="-fx-background-color: #ececec; -fx-padding: 10;">
-            <Label text="Welcome to Course Management - Teacher" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
-        </HBox>
+        <VBox spacing="10" style="-fx-background-color: #ececec; -fx-padding: 10;">
+            <Label text="Welcome to Course Management - Teacher Dashboard"
+                   style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+        </VBox>
     </top>
 
     <!-- 左侧导航栏 -->
     <left>
         <VBox spacing="10" style="-fx-background-color: #e6e6e6; -fx-padding: 10;">
             <Label text="Navigation" style="-fx-font-size: 14px; -fx-font-weight: bold;" />
-            <Button text="Manage Attendance" onAction="#handleManageAttendance" />
-            <Button text="Manage Classes" onAction="#handleManageClasses" />
-            <Button text="Manage Students" onAction="#handleManageStudents" />
-            <Button text="Generate Report" onAction="#handleGenerateReport" />
-            <!-- 分隔空白区域 -->
-            <!-- 分隔空白区域 -->
+            <Button text="Manage Attendance" onAction="#showAttendanceView" />
+            <Button text="Manage Classes" onAction="#showClassesView" />
+            <Button text="Manage Students" onAction="#showStudentsView" />
+            <Button text="Generate Report" onAction="#showReportView" />
             <Region VBox.vgrow="always" />
-
-            <!-- Logout 按钮 -->
-            <Button text="Logout"
-                    onAction="#handleLogout"
-                    style="-fx-background-color: #ff4d4d; -fx-text-fill: white; -fx-font-weight: bold;"/>
+            <Button text="Logout" onAction="#handleLogout"
+                    style="-fx-background-color: #ff4d4d; -fx-text-fill: white;" />
         </VBox>
     </left>
 
-    <!-- 中央表格区域 -->
+    <!-- 右侧内容区域 -->
     <center>
-        <VBox spacing="10" style="-fx-padding: 10;">
-            <HBox spacing="10">
-                <Label text="Search Course:" />
-                <TextField promptText="Search Course..." />
-                <Button text="Search" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" />
-            </HBox>
+        <StackPane fx:id="contentPane">
+            <!-- 初始视图：课程管理 -->
+            <VBox fx:id="defaultView" spacing="10" style="-fx-padding: 10;">
+                <StackPane>
+                    <Label text="Course Management" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+                </StackPane>
+            </VBox>
 
-            <TableView>
-                <columns>
-                    <TableColumn text="Course ID" />
-                    <TableColumn text="Course Name" />
-                    <TableColumn text="Instructor" />
-                </columns>
-            </TableView>
+            <!-- 考勤管理视图 -->
+            <VBox fx:id="attendanceView" spacing="10" style="-fx-padding: 10;" visible="false">
+                <Label text="Attendance Management" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+                <Label text="This is the attendance management screen." />
+            </VBox>
 
-            <HBox spacing="10">
-                <Button text="Add Course" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" />
-                <Button text="Edit Course" style="-fx-background-color: #2196F3; -fx-text-fill: white;" />
-                <Button text="Delete Course" style="-fx-background-color: #f44336; -fx-text-fill: white;" />
-            </HBox>
-        </VBox>
+            <!-- 班级管理视图 -->
+            <VBox fx:id="classesView" spacing="10" style="-fx-padding: 10;" visible="false">
+                <Label text="Class Management" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+                <Label text="This is the class management screen." />
+            </VBox>
+
+            <!-- 学生管理视图 -->
+            <VBox fx:id="studentsView" spacing="10" style="-fx-padding: 10;" visible="false">
+                <Label text="Student Management" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+                <Label text="This is the student management screen." />
+            </VBox>
+
+            <!-- 报告生成视图 -->
+            <VBox fx:id="reportView" spacing="10" style="-fx-padding: 10;" visible="false">
+                <Label text="Generate Report" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+                <Label text="This is the report generation screen." />
+            </VBox>
+        </StackPane>
     </center>
 </BorderPane>

@@ -1,24 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<VBox spacing="10" xmlns:fx="http://javafx.com/fxml">
-    <Label text="Manage Students" style="-fx-font-size: 20px;" />
-    <TableView>
-        <columns>
-            <TableColumn text="Student ID" />
-            <TableColumn text="Name" />
-            <TableColumn text="Class" />
-        </columns>
-    </TableView>
-    <HBox spacing="10">
-        <Button text="Add Student" />
-        <Button text="Edit Student" />
-        <Button text="Delete Student" />
-    </HBox>
-</VBox>
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="controller.ManageStudentsController">
+
+    <!-- 顶部搜索栏 -->
+    <top>
+        <HBox spacing="10" style="-fx-padding: 10;">
+            <Label text="Search Student:"/>
+            <TextField fx:id="studentSearchField" promptText="Enter student name..."
+                       onKeyPressed="#handleSearchKeyPressed"/>
+            <Button text="Search" onAction="#searchStudent"/>
+        </HBox>
+    </top>
+
+    <!-- 中央表格 -->
+    <center>
+        <TableView fx:id="studentTable">
+            <columns>
+                <TableColumn text="Student ID" fx:id="studentIdColumn"/>
+                <TableColumn text="Name" fx:id="studentNameColumn"/>
+                <TableColumn text="Email" fx:id="studentEmailColumn"/>
+                <TableColumn text="Phone" fx:id="studentPhoneColumn"/>
+                <TableColumn text="Address" fx:id="studentAddressColumn"/>
+                <TableColumn text="Class ID" fx:id="studentClassIdColumn"/>
+            </columns>
+        </TableView>
+    </center>
+
+    <!-- 底部按钮 -->
+    <bottom>
+        <HBox spacing="10" style="-fx-padding: 10;">
+            <Button text="Add Student" onAction="#addStudent"/>
+            <Button text="Edit Student" onAction="#editStudent"/>
+            <Button text="Delete Student" onAction="#deleteStudent"/>
+        </HBox>
+    </bottom>
+</BorderPane>

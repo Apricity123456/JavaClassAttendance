@@ -1,24 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<VBox spacing="10" xmlns:fx="http://javafx.com/fxml">
-    <Label text="Manage Classes" style="-fx-font-size: 20px;" />
-    <TableView>
-        <columns>
-            <TableColumn text="Class ID" />
-            <TableColumn text="Class Name" />
-            <TableColumn text="Instructor" />
-        </columns>
-    </TableView>
-    <HBox spacing="10">
-        <Button text="Add Class" />
-        <Button text="Edit Class" />
-        <Button text="Delete Class" />
-    </HBox>
-</VBox>
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="controller.ClassController">
+
+    <!-- 顶部搜索栏 -->
+    <top>
+        <HBox spacing="10" style="-fx-padding: 10;">
+            <Label text="Search Class:"/>
+            <TextField fx:id="classSearchField" promptText="Enter class name..."
+                       onKeyPressed="#handleSearchKeyPressed"/>
+            <Button text="Search" onAction="#searchClass"/>
+
+        </HBox>
+    </top>
+
+    <!-- 中央表格 -->
+    <center>
+        <TableView fx:id="classTable">
+            <columns>
+                <TableColumn text="Class ID" fx:id="classIdColumn"/>
+                <TableColumn text="Class Name" fx:id="classNameColumn"/>
+                <TableColumn text="Instructor" fx:id="instructorColumn"/>
+                <TableColumn text="Schedule" fx:id="scheduleColumn"/>
+            </columns>
+        </TableView>
+    </center>
+
+    <!-- 底部按钮 -->
+    <bottom>
+        <HBox spacing="10" style="-fx-padding: 10;">
+            <Button text="Add Class" onAction="#addClass"/>
+            <Button text="Edit Class" onAction="#editClass"/>
+            <Button text="Delete Class" onAction="#deleteClass"/>
+        </HBox>
+    </bottom>
+</BorderPane>

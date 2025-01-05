@@ -8,9 +8,10 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import view.MainApp;
 
-import database.DatabaseConnection;
+import model.DatabaseConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -107,11 +108,20 @@ public class LoginController {
         System.exit(0);
     }
 
-    private void showAlert(Alert.AlertType type, String title, String content) {
-        Alert alert = new Alert(type);
+    private void showAlert(Alert.AlertType alertType, String title, String content) {
+        Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(content);
+
+        // 自定义图标并优化大小
+        Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+        Image icon = new Image(
+                getClass().getResourceAsStream("/images/logo.png"),
+                60, 30, true, true // 设置宽度和高度，并保持长宽比
+        );
+        stage.getIcons().add(icon);
+
         alert.showAndWait();
     }
 }

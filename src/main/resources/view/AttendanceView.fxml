@@ -1,19 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 
-<VBox spacing="10" xmlns:fx="http://javafx.com/fxml">
-    <Label text="Attendance Management" style="-fx-font-size: 20px;" />
-    <TableView>
+<VBox spacing="10" style="-fx-padding: 10;" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controller.AttendanceController">
+    <Label text="Attendance Management" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+
+    <HBox spacing="10">
+        <Label text="Search by Student ID:" />
+        <TextField fx:id="attendanceSearchField" promptText="Enter student ID..." />
+        <Button text="Search" onAction="#searchAttendance" />
+    </HBox>
+
+
+    <TableView fx:id="attendanceTable" prefHeight="400">
         <columns>
-            <TableColumn text="Student ID" />
-            <TableColumn text="Name" />
-            <TableColumn text="Attendance Status" />
+            <TableColumn fx:id="studentIdColumn" text="Student ID" prefWidth="100"/>
+            <TableColumn fx:id="studentNameColumn" text="Student Name" prefWidth="200"/>
+            <TableColumn fx:id="attendanceDateColumn" text="Date" prefWidth="150"/>
+            <TableColumn fx:id="statusColumn" text="Status" prefWidth="100"/>
+            <TableColumn fx:id="remarksColumn" text="Remarks" prefWidth="250"/>
         </columns>
     </TableView>
-    <Button text="Mark Attendance" />
+
+    <HBox spacing="10">
+        <Button text="Update Attendance Status"
+                onAction="#updateAttendanceStatus"/>
+        <Button text="Edit Remarks" onAction="#editRemarks" />
+    </HBox>
 </VBox>

@@ -6,62 +6,111 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ButtonBar;
-
 import javafx.fxml.FXML;
+import javafx.scene.image.Image;
+import javafx.scene.layout.VBox;
+
 import javafx.scene.control.Alert;
+import javafx.stage.Stage;
 import view.MainApp;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import java.io.IOException;
+import javafx.scene.layout.Pane;
 
 public class TeacherController {
 
     @FXML
-    private TableView<?> tableView; // 课程表格占位符（这里暂时没有实际数据）
-
+    private VBox defaultView;
     @FXML
-    private Button manageAttendanceButton;
-
+    private VBox attendanceView;
     @FXML
-    private Button manageClassesButton;
-
+    private VBox classesView;
+    @FXML
+    private VBox studentsView;
+    @FXML
+    private VBox reportView;
+    @FXML
+    private Pane contentPane;
     @FXML
     private Button manageStudentsButton;
 
     @FXML
-    private Button generateReportButton;
+    public void initialize() {
+        System.out.println(getClass().getResource("/view/ManageStudents.fxml"));
+
+        // 显示默认视图
+        showDefaultView();
+    }
+
+    private void hideAllViews() {
+        defaultView.setVisible(false);
+        attendanceView.setVisible(false);
+        classesView.setVisible(false);
+        studentsView.setVisible(false);
+        reportView.setVisible(false);
+    }
 
     @FXML
-    private void initialize() {
-        // 初始化页面逻辑，比如设置表格的数据
-        System.out.println("Teacher Dashboard Initialized");
+    private void showDefaultView() {
+        hideAllViews();
+        defaultView.setVisible(true);
+    }
+
+    @FXML
+    private void showAttendanceView() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/AttendanceView.fxml"));
+            Parent root = loader.load();
+            contentPane.getChildren().setAll(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void showClassesView() {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/view/ManageClasses.fxml"));
+            contentPane.getChildren().setAll(root); // contentPane 是你右侧的主要区域容器
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Navigation Error", "Failed to load Manage Classes view.");
+        }
+    }
+
+    @FXML
+    private void showStudentsView() {
+        try {
+            System.out.println(getClass().getResource("/view/ManageStudents.fxml"));
+            // 加载 ManageStudents.fxml 文件
+            Parent root = FXMLLoader.load(getClass().getResource("/view/ManageStudents.fxml"));
+
+            // 将加载的视图设置到 contentPane 中
+            contentPane.getChildren().setAll(root);
+        } catch (IOException e) {
+            // 捕获并打印异常信息
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Navigation Error", "Failed to load Manage Students view.");
+        }
+    }
+
+    @FXML
+    private void showReportView() {
+        try {
+            // 加载 GenerateReport.fxml
+            Parent root = FXMLLoader.load(getClass().getResource("/view/GenerateReport.fxml"));
+            contentPane.getChildren().setAll(root); // contentPane 是你的右侧主容器
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Navigation Error", "Failed to load Generate Report view.");
+        }
     }
 
     private MainApp mainApp;
 
     public void initializeMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
-    }
-
-    @FXML
-    private void handleManageAttendance() {
-        showInfoAlert("Manage Attendance", "This will open the attendance management page.");
-        // TODO: 页面跳转逻辑，调用 MainApp.showAttendancePage()
-    }
-
-    @FXML
-    private void handleManageClasses() {
-        showInfoAlert("Manage Classes", "This will open the class management page.");
-        // TODO: 页面跳转逻辑，调用 MainApp.showManageClassesPage()
-    }
-
-    @FXML
-    private void handleManageStudents() {
-        showInfoAlert("Manage Students", "This will open the student management page.");
-        // TODO: 页面跳转逻辑，调用 MainApp.showManageStudentsPage()
-    }
-
-    @FXML
-    private void handleGenerateReport() {
-        showInfoAlert("Generate Report", "This will generate a report.");
-        // TODO: 页面跳转逻辑，调用 MainApp.showGenerateReportPage()
     }
 
     @FXML
@@ -89,11 +138,20 @@ public class TeacherController {
         });
     }
 
-    private void showInfoAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    private void showAlert(Alert.AlertType alertType, String title, String content) {
+        Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setHeaderText(null);
-        alert.setContentText(message);
+        alert.setContentText(content);
+
+        // 自定义图标并优化大小
+        Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+        Image icon = new Image(
+                getClass().getResourceAsStream("/images/logo.png"),
+                60, 30, true, true // 设置宽度和高度，并保持长宽比
+        );
+        stage.getIcons().add(icon);
+
         alert.showAndWait();
     }
 }

@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.Button?>
-<?import javafx.collections.FXCollections?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
 
-<VBox spacing="10" xmlns:fx="http://javafx.com/fxml">
-    <Label text="Generate Report" style="-fx-font-size: 20px;" />
-    <HBox spacing="10">
-        <Label text="Select Report Type:" />
-        <ChoiceBox>
-            <items>
-                <FXCollections fx:factory="observableArrayList" fx:value="Attendance Report" />
-                <FXCollections fx:factory="observableArrayList" fx:value="Class Report" />
-            </items>
-        </ChoiceBox>
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controller.GenerateReportController"
+      spacing="15" alignment="CENTER">
+
+    <Label text="Generate Report" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+    <HBox spacing="10" alignment="CENTER">
+        <Label text="Select Report Type:"/>
+        <ChoiceBox fx:id="reportTypeChoiceBox"/>
     </HBox>
-    <Button text="Generate Report" />
+
+    <Button text="Generate Report" onAction="#generateReport"
+            style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+
 </VBox>
