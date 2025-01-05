@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="controller.StudentManageClassesController" spacing="10" style="-fx-padding: 10;">
+    <HBox spacing="10">
+        <TextField fx:id="searchField" promptText="Enter class name..." />
+        <Button text="Search" onAction="#searchClasses" />
+    </HBox>
+    <TableView fx:id="classTable" prefHeight="400">
+        <columns>
+            <TableColumn fx:id="classIdColumn" text="Class ID" prefWidth="100"/>
+            <TableColumn fx:id="classNameColumn" text="Class Name" prefWidth="200"/>
+            <TableColumn fx:id="instructorColumn" text="Instructor" prefWidth="150"/>
+            <TableColumn fx:id="scheduleColumn" text="Schedule" prefWidth="200"/>
+        </columns>
+    </TableView>
+</VBox>

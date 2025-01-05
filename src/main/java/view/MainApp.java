@@ -12,7 +12,7 @@ import javafx.stage.StageStyle;
 import controller.LoginController;
 import controller.RegisterController;
 import controller.TeacherController;
-import controller.StudentController;
+import controller.StudentDashboardController;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button; // 按钮控件
 import javafx.scene.control.Label; // 标签控件
@@ -144,10 +144,10 @@ public class MainApp extends Application {
      * 显示学生主页面
      */
     public void showStudentPage() {
-        // loadPage("/view/StudentView.fxml","Student Dashboard");
+        // loadPage("/view/StudentDashboard.fxml","Student Dashboard");
         try {
             // 加载 FXML 文件
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/StudentView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/StudentDashboard.fxml"));
             BorderPane root = loader.load(); // 加载 BorderPane 布局
 
             // 调用 createHeaderBar() 并将其添加到顶部
@@ -161,7 +161,7 @@ public class MainApp extends Application {
             // 调用 addWindowDrag 并传入 Scene 实现窗口拖动
             addWindowDrag(scene);
 
-            StudentController StudentViewController = loader.getController();
+            StudentDashboardController StudentViewController = loader.getController();
             StudentViewController.initializeMainApp(this);
             // 设置场景和窗口标题
             primaryStage.setScene(scene);
