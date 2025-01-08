@@ -2,3 +2,5 @@
 
 1. mvn clean install   
 2. mvn clean javafx:run
+
+ jpackage --input target/ --main-jar class-management-1.0-SNAPSHOT-jar-with-dependencies.jar  --main-class view.MainApp --type exe --name ClassManagementApp --icon src/main/resources/images/logo.ico
