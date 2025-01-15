@@ -11,21 +11,21 @@
 <?import javafx.scene.control.TextField?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="controller.LoginController">
-    <!-- 顶部标题栏 -->
+    <!-- top -->
     <top>
         <HBox spacing="10" style="-fx-background-color: #ececec; -fx-padding: 10;">
             <Label text="Welcome to Course Management - Login" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
         </HBox>
     </top>
 
-    <!-- 左侧导航栏（可省略或作为样式模板保留） -->
+    <!-- left navigation -->
     <left>
         <VBox spacing="10" style="-fx-background-color: #e6e6e6; -fx-padding: 10;">
             <!-- You can add more options here if needed -->
         </VBox>
     </left>
 
-    <!-- 中央登录区域 -->
+    <!-- login area -->
     <center>
         <VBox spacing="15" style="-fx-padding: 30; -fx-alignment: center;">
             <!-- 用户名输入框 -->
@@ -34,13 +34,13 @@
                 <TextField fx:id="usernameField" promptText="Enter your username" style="-fx-padding: 5px; -fx-border-radius: 5px;"/>
             </HBox>
 
-            <!-- 密码输入框 -->
+            <!-- password -->
             <HBox spacing="10" alignment="center">
                 <Label text="Password:" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
                 <PasswordField fx:id="passwordField" promptText="Enter your password" style="-fx-padding: 5px; -fx-border-radius: 5px;"/>
             </HBox>
 
-            <!-- 选择角色 -->
+            <!-- select role -->
             <HBox spacing="10" alignment="center">
                 <Label text="Role:" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
                 <ComboBox fx:id="roleComboBox" style="-fx-padding: 5px; -fx-border-radius: 5px;">
@@ -56,7 +56,7 @@
             </HBox>
 
 
-            <!-- 注册链接 -->
+            <!-- registration -->
             <HBox spacing="10" alignment="center">
                 <Label text="Don't have an account? Register here." style="-fx-font-size: 12px; -fx-text-fill: #1E90FF;" onMouseClicked="#showRegistrationPage"/>
             </HBox>

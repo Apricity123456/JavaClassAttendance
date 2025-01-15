@@ -5,7 +5,7 @@
 
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="controller.ClassController">
 
-    <!-- 顶部搜索栏 -->
+    <!-- search -->
     <top>
         <HBox spacing="10" style="-fx-padding: 10;">
             <Label text="Search Class:"/>
@@ -16,7 +16,7 @@
         </HBox>
     </top>
 
-    <!-- 中央表格 -->
+    <!-- central table -->
     <center>
         <TableView fx:id="classTable">
             <columns>
@@ -28,7 +28,7 @@
         </TableView>
     </center>
 
-    <!-- 底部按钮 -->
+    <!-- button -->
     <bottom>
         <HBox spacing="10" style="-fx-padding: 10;">
             <Button text="Add Class" onAction="#addClass"/>

@@ -5,7 +5,7 @@
 
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="controller.ManageStudentsController">
 
-    <!-- 顶部搜索栏 -->
+    <!-- search -->
     <top>
         <HBox spacing="10" style="-fx-padding: 10;">
             <Label text="Search Student:"/>
@@ -15,7 +15,7 @@
         </HBox>
     </top>
 
-    <!-- 中央表格 -->
+    <!-- central table -->
     <center>
         <TableView fx:id="studentTable">
             <columns>
@@ -29,7 +29,7 @@
         </TableView>
     </center>
 
-    <!-- 底部按钮 -->
+    <!-- button -->
     <bottom>
         <HBox spacing="10" style="-fx-padding: 10;">
             <Button text="Add Student" onAction="#addStudent"/>

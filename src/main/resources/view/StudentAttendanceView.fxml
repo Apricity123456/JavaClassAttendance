@@ -12,18 +12,18 @@
 <VBox xmlns:fx="http://javafx.com/fxml" fx:controller="controller.StudentAttendanceController"
       spacing="10" style="-fx-padding: 20;">
 
-    <!-- 顶部标题栏 -->
+    <!-- top -->
     <Label text="Attendance Management"
            style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
 
-    <!-- 搜索栏 -->
+    <!-- search -->
     <HBox spacing="10">
         <Label text="Search by Student ID:" />
         <TextField fx:id="searchField" promptText="Enter student ID..."/>
         <Button text="Search" onAction="#searchAttendance"/>
     </HBox>
 
-    <!-- 考勤表格 -->
+    <!-- attendance table -->
     <TableView fx:id="attendanceTable" prefHeight="400">
         <columns>
             <TableColumn fx:id="studentIdColumn" text="Student ID" prefWidth="100"/>

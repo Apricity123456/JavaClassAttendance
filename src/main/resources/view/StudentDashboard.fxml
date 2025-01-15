@@ -13,7 +13,7 @@
 
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="controller.StudentDashboardController">
 
-    <!-- 顶部标题栏 -->
+    <!-- top -->
     <top>
         <VBox spacing="10" style="-fx-background-color: #ececec; -fx-padding: 10;">
             <Label text="Welcome to Course Management - Student Dashboard"
@@ -21,7 +21,7 @@
         </VBox>
     </top>
 
-    <!-- 左侧导航栏 -->
+    <!-- left navigation -->
     <left>
         <VBox spacing="10" style="-fx-background-color: #e6e6e6; -fx-padding: 10;">
             <Label text="Navigation" style="-fx-font-size: 14px; -fx-font-weight: bold;" />
@@ -34,7 +34,7 @@
         </VBox>
     </left>
 
-    <!-- 右侧内容区域 -->
+    <!-- right attendanceview -->
     <center>
         <StackPane fx:id="contentPane">
             <!-- 考勤管理视图 -->
@@ -43,13 +43,13 @@
                 <Label text="This is the attendance management screen." />
             </VBox>
 
-            <!-- 班级管理视图 -->
+            <!-- classview -->
             <VBox fx:id="classesView" spacing="10" style="-fx-padding: 10;" visible="false">
                 <Label text="Class Management" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
                 <Label text="This is the class management screen." />
             </VBox>
 
-            <!-- 报告生成视图 -->
+            <!-- reportview -->
             <VBox fx:id="reportView" spacing="10" style="-fx-padding: 10;" visible="false">
                 <Label text="Generate Report" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
                 <Label text="This is the report generation screen." />

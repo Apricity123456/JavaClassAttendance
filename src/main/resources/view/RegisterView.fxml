@@ -17,32 +17,32 @@
     </top>
     <center>
         <VBox spacing="20" style="-fx-padding: 20; -fx-alignment: center;">
-            <!-- 选择身份 -->
+            <!-- select role -->
             <HBox spacing="15" alignment="center">
                 <Label text="Role:" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
                 <ComboBox fx:id="roleComboBox" style="-fx-padding: 5px; -fx-border-radius: 5px;" onAction="#handleRoleSelection">
                 </ComboBox>
             </HBox>
 
-            <!-- 姓名字段（根据身份选择显示）-->
+            <!-- name-->
             <HBox spacing="15" alignment="center">
                 <Label text="Name:" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
                 <TextField fx:id="nameField" promptText="Enter your name" style="-fx-padding: 5px; -fx-border-radius: 5px;"/>
             </HBox>
 
-            <!-- 用户名字段 -->
+            <!-- username -->
             <HBox spacing="15" alignment="center">
                 <Label text="Username:" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
                 <TextField fx:id="usernameField" promptText="Enter a username" style="-fx-padding: 5px; -fx-border-radius: 5px;"/>
             </HBox>
 
-            <!-- 密码字段 -->
+            <!-- password -->
             <HBox spacing="15" alignment="center">
                 <Label text="Password:" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
                 <PasswordField fx:id="passwordField" promptText="Enter password" style="-fx-padding: 5px; -fx-border-radius: 5px;"/>
             </HBox>
 
-            <!-- 确认密码字段 -->
+            <!-- confirm password -->
             <HBox spacing="15" alignment="center">
                 <Label text="Confirm Password:" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
                 <PasswordField fx:id="confirmPasswordField" promptText="Confirm your password" style="-fx-padding: 5px; -fx-border-radius: 5px;"/>
