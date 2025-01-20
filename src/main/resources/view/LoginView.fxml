@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="controller.LoginController">
+    <!-- top -->
+    <top>
+        <HBox spacing="10" style="-fx-background-color: #ececec; -fx-padding: 10;">
+            <Label text="Welcome to Course Management - Login" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+        </HBox>
+    </top>
+
+    <!-- left navigation -->
+    <left>
+        <VBox spacing="10" style="-fx-background-color: #e6e6e6; -fx-padding: 10;">
+            <!-- You can add more options here if needed -->
+        </VBox>
+    </left>
+
+    <!-- login area -->
+    <center>
+        <VBox spacing="15" style="-fx-padding: 30; -fx-alignment: center;">
+            <!-- 用户名输入框 -->
+            <HBox spacing="10" alignment="center">
+                <Label text="Username:" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+                <TextField fx:id="usernameField" promptText="Enter your username" style="-fx-padding: 5px; -fx-border-radius: 5px;"/>
+            </HBox>
+
+            <!-- password -->
+            <HBox spacing="10" alignment="center">
+                <Label text="Password:" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+                <PasswordField fx:id="passwordField" promptText="Enter your password" style="-fx-padding: 5px; -fx-border-radius: 5px;"/>
+            </HBox>
+
+            <!-- select role -->
+            <HBox spacing="10" alignment="center">
+                <Label text="Role:" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+                <ComboBox fx:id="roleComboBox" style="-fx-padding: 5px; -fx-border-radius: 5px;">
+                    <items>
+                        <!-- Add roles here -->
+                    </items>
+                </ComboBox>
+            </HBox>
+
+            <HBox spacing="20" alignment="center">
+                <Button text="Login" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-padding: 10px; -fx-border-radius: 5px;" onAction="#handleLogin"/>
+                <Button text="Exit" style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-padding: 10px; -fx-border-radius: 5px;" onAction="#handleExit"/>
+            </HBox>
+
+
+            <!-- registration -->
+            <HBox spacing="10" alignment="center">
+                <Label text="Don't have an account? Register here." style="-fx-font-size: 12px; -fx-text-fill: #1E90FF;" onMouseClicked="#showRegistrationPage"/>
+            </HBox>
+
+        </VBox>
+    </center>
+</BorderPane>
